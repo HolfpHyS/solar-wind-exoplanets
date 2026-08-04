@@ -1,0 +1,37 @@
+{
+  "data_dir": "/Users/aidarryazhapov/Documents/absorb/participant/new_dataset_V3",
+  "planet_params": "/Users/aidarryazhapov/Documents/absorb/pro/aux_data/planet_params.csv",
+  "output_dir": "/Users/aidarryazhapov/Documents/absorb/pro/runs/oof_ranker_smoke",
+  "outer_split_seed": 42,
+  "fold_seed": 1701,
+  "folds": 2,
+  "grouping": "union of exact target tuples and exact interpolated profiles",
+  "generator_seeds": [
+    0
+  ],
+  "generator_epochs": 2,
+  "generator_checkpoint_selection": "fixed epochs; no OOF/dev early stopping",
+  "ranker_seeds": [
+    0
+  ],
+  "ranker_epochs": 8,
+  "ranker_split_seed": 2718,
+  "ranker_features": "profile_pca16 + candidate3 + delta_to_pool_median3 + abs_delta3 + distance_to_median1 + mean_3nn_distance1",
+  "ranker_model": "MLP 27->64->32->1, dropout=0.1",
+  "objectives": [
+    "xuv",
+    "joint",
+    "combined"
+  ],
+  "device": "cpu",
+  "threads": 4,
+  "versions": {
+    "python": "3.12.7 | packaged by Anaconda, Inc. | (main, Oct  4 2024, 08:22:19) [Clang 14.0.6 ]",
+    "platform": "macOS-26.2-arm64-arm-64bit",
+    "numpy": "1.26.4",
+    "torch": "2.12.1",
+    "scipy": "1.13.1",
+    "sklearn": "1.5.1",
+    "pandas": "2.2.2"
+  }
+}

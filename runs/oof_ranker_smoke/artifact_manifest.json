@@ -1,0 +1,92 @@
+{
+  "source_status": "OOF ranker development pilot; final 123 rows are historical development validation, not an untouched test",
+  "source_files": [
+    {
+      "path": "/Users/aidarryazhapov/Documents/absorb/pro/run_oof_ranker_experiment.py",
+      "bytes": 42762,
+      "sha256": "409c0374b7b5e09ef37e41bc558d4bb4e3310b667c5decabae0b7f7b457bc31f"
+    },
+    {
+      "path": "/Users/aidarryazhapov/Documents/absorb/pro/run_aux_conditioning.py",
+      "bytes": 32676,
+      "sha256": "73418b0c492b0632ec417ab76d6eb903cf1d058dc39707e7a36c4a926b6062b0"
+    },
+    {
+      "path": "/Users/aidarryazhapov/Documents/absorb/pro/planet_pseudolabels.py",
+      "bytes": 2724,
+      "sha256": "1ed0861c80d8c3ab0a8cea373b3dacd7736b34974cb771b158412b24e20f19b2"
+    },
+    {
+      "path": "/Users/aidarryazhapov/Documents/absorb/pro/aux_data/planet_params.csv",
+      "bytes": 1169,
+      "sha256": "779ccd095a3c61c0d694d798ae14aee2bf5a04e4e7efd35823ecdfca92afe936"
+    }
+  ],
+  "artifacts": [
+    {
+      "name": "config.json",
+      "bytes": 1184,
+      "sha256": "022509e595e81b3a3afc8591b0129ad31ff4d9162e9f7b903c56451e5c9dead5"
+    },
+    {
+      "name": "dataset_manifest.csv",
+      "bytes": 107108,
+      "sha256": "217ac8532d00c22c13be1da06b6ee0b3fde8c7c3e3d5556f1d452bfc682bc179"
+    },
+    {
+      "name": "dev_candidates.npz",
+      "bytes": 29824,
+      "sha256": "7642ce1dc6323d60cb1a5e61ddc9636bd025680e7dc68dbcfc1aab30fec50eb3"
+    },
+    {
+      "name": "dev_ranker_scores.npz",
+      "bytes": 24862,
+      "sha256": "7ce7b586298bc1dad86688ac842cf1dd2c8671e2a26193f43affc7c9c845c208"
+    },
+    {
+      "name": "dev_truth_for_evaluation.npz",
+      "bytes": 17990,
+      "sha256": "026e9a40d976db0c70631e2b0f5d91e7c265cc1f5c92021d3e3f079de49dfe73"
+    },
+    {
+      "name": "final_model_0.pt",
+      "bytes": 9628637,
+      "sha256": "3032ec4ba95acca20db567d782e3154f6fbafbe7ba571ab3bd4102ed9a1da8e7"
+    },
+    {
+      "name": "metrics.json",
+      "bytes": 14145,
+      "sha256": "bd15596354701e5abdf91e5500c258dab1b63625b3c886980b3808fa90a3f0ed"
+    },
+    {
+      "name": "oof_candidates.npz",
+      "bytes": 138986,
+      "sha256": "bdfd9945e58af00193e795f2ff32a280b58caac1270aa202268c68a66d7e6e79"
+    },
+    {
+      "name": "oof_manifest.csv",
+      "bytes": 21094,
+      "sha256": "db214cd4e5ec66b6de5ca0f9de926f5696bf62123deb42fb88608dae9542c582"
+    },
+    {
+      "name": "preproc.npz",
+      "bytes": 8810,
+      "sha256": "8499cc03a4c90deb41f0d657bb691ef70d4376568c2dc1b6fcf80787ac6fc6cd"
+    },
+    {
+      "name": "ranker_combined_0.pt",
+      "bytes": 18829,
+      "sha256": "a3789b0bd988f0a8429befb19660caf49f1d9f025284fe3381e6e09cd8ad4317"
+    },
+    {
+      "name": "ranker_joint_0.pt",
+      "bytes": 18793,
+      "sha256": "61002e6adb44aea0c70615dd5c97acf58acf3a124451179306a7eec634bdf25f"
+    },
+    {
+      "name": "ranker_xuv_0.pt",
+      "bytes": 18769,
+      "sha256": "12d900cd08f98a1d1fb4bf096a396a067d952b07849a2488b803b0756624084e"
+    }
+  ]
+}

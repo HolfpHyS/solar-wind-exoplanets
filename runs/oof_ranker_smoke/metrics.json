@@ -1,0 +1,384 @@
+{
+  "status": "development_pilot",
+  "warning": "The 123-row outer development split has been inspected in prior experiments and is not an untouched final test.",
+  "dataset": {
+    "rows": 613,
+    "outer_train_rows": 490,
+    "outer_development_rows": 123,
+    "oof_folds": 2,
+    "exact_duplicate_groups_outer_train": 7
+  },
+  "candidate_generator": {
+    "seeds": [
+      0
+    ],
+    "heads_per_model": 5,
+    "candidate_count": 5,
+    "fixed_epochs": 2,
+    "checkpoint_selection": "none; fixed epoch",
+    "oof_models": [
+      {
+        "seed": 0,
+        "epochs": 2,
+        "last_train_loss": 1.3402291927260426,
+        "elapsed_seconds": 1.207551792031154,
+        "planet_classifier_fit_rows": 231,
+        "planet_classifier_fit_prediction_rows": 0,
+        "stage": "oof",
+        "fold": 0,
+        "train_rows": 247,
+        "prediction_rows": 243
+      },
+      {
+        "seed": 0,
+        "epochs": 2,
+        "last_train_loss": 1.3296177181196802,
+        "elapsed_seconds": 0.9231852500233799,
+        "planet_classifier_fit_rows": 235,
+        "planet_classifier_fit_prediction_rows": 0,
+        "stage": "oof",
+        "fold": 1,
+        "train_rows": 243,
+        "prediction_rows": 247
+      }
+    ],
+    "final_models": [
+      {
+        "seed": 0,
+        "epochs": 2,
+        "last_train_loss": 1.2369544987775842,
+        "elapsed_seconds": 1.5335210419725627,
+        "planet_classifier_fit_rows": 466,
+        "planet_classifier_fit_prediction_rows": 0,
+        "stage": "final_refit",
+        "train_rows": 490,
+        "prediction_rows": 123
+      }
+    ]
+  },
+  "rankers": {
+    "xuv": {
+      "objective": "xuv",
+      "temperature": 0.15988552570343018,
+      "train_objects": 392,
+      "internal_validation_objects": 98,
+      "models": [
+        {
+          "seed": 0,
+          "best_epoch": 8,
+          "best_internal_validation_loss": 1.5805128812789917,
+          "elapsed_seconds": 0.08289916696958244
+        }
+      ]
+    },
+    "joint": {
+      "objective": "joint",
+      "temperature": 0.3650555908679962,
+      "train_objects": 392,
+      "internal_validation_objects": 98,
+      "models": [
+        {
+          "seed": 0,
+          "best_epoch": 8,
+          "best_internal_validation_loss": 1.5984302759170532,
+          "elapsed_seconds": 0.06675595906563103
+        }
+      ]
+    },
+    "combined": {
+      "objective": "combined",
+      "temperature": 0.2606392502784729,
+      "train_objects": 392,
+      "internal_validation_objects": 98,
+      "models": [
+        {
+          "seed": 0,
+          "best_epoch": 8,
+          "best_internal_validation_loss": 1.5838342905044556,
+          "elapsed_seconds": 0.07718487503007054
+        }
+      ]
+    }
+  },
+  "oracle_all_candidates_coordinate_metrics": {
+    "xuv_mape_pct": 47.82605829530828,
+    "helium_mape_pct": 53.63360906779649,
+    "log_msw_mape_pct": 2.032796014740686,
+    "log_msw_mae_dex": 0.25694220399266254,
+    "linear_msw_mape_pct": 149.28775237821273
+  },
+  "evaluation": {
+    "xuv": {
+      "name": "oof_xuv",
+      "mean_spearman_score_vs_negative_joint_distance": -0.16422764227642275,
+      "best_joint_candidate_rank": {
+        "mean": 3.065040650406504,
+        "median": 3.0,
+        "mrr": 0.44065040650406506,
+        "recall_at_1": 0.17886178861788618,
+        "recall_at_3": 0.5934959349593496,
+        "recall_at_5": 1.0
+      },
+      "ranked_prefixes": {
+        "1": {
+          "coordinate_metrics": {
+            "xuv_mape_pct": 65.68678255146042,
+            "helium_mape_pct": 75.81231378567541,
+            "log_msw_mape_pct": 3.2419613696509106,
+            "log_msw_mae_dex": 0.41305671612752387,
+            "linear_msw_mape_pct": 252.3376636572539
+          },
+          "mean_minimum_joint_distance": 1.363323226257224,
+          "joint_coverage_distance_le_0_5": 0.06504065040650407,
+          "xuv_hit_within_10pct": 0.10569105691056911,
+          "xuv_hit_within_20pct": 0.17073170731707318
+        },
+        "3": {
+          "coordinate_metrics": {
+            "xuv_mape_pct": 50.07797549756159,
+            "helium_mape_pct": 58.089803530355454,
+            "log_msw_mape_pct": 2.199214706181372,
+            "log_msw_mae_dex": 0.2783687472693424,
+            "linear_msw_mape_pct": 164.3177828910054
+          },
+          "mean_minimum_joint_distance": 1.0517884810338176,
+          "joint_coverage_distance_le_0_5": 0.13008130081300814,
+          "xuv_hit_within_10pct": 0.21138211382113822,
+          "xuv_hit_within_20pct": 0.3170731707317073
+        },
+        "5": {
+          "coordinate_metrics": {
+            "xuv_mape_pct": 47.82605829530828,
+            "helium_mape_pct": 53.63360906779649,
+            "log_msw_mape_pct": 2.032796014740686,
+            "log_msw_mae_dex": 0.25694220399266254,
+            "linear_msw_mape_pct": 149.28775237821273
+          },
+          "mean_minimum_joint_distance": 0.9802692670845762,
+          "joint_coverage_distance_le_0_5": 0.17073170731707318,
+          "xuv_hit_within_10pct": 0.21951219512195122,
+          "xuv_hit_within_20pct": 0.36585365853658536
+        }
+      },
+      "top1_simultaneous_20pct_20pct_0_1dex": 0.008130081300813009,
+      "mmr_selected_5": {
+        "coordinate_metrics": {
+          "xuv_mape_pct": 47.82605829530828,
+          "helium_mape_pct": 53.63360906779649,
+          "log_msw_mape_pct": 2.032796014740686,
+          "log_msw_mae_dex": 0.25694220399266254,
+          "linear_msw_mape_pct": 149.28775237821273
+        },
+        "mean_minimum_joint_distance": 0.9802692670845762,
+        "joint_coverage_distance_le_0_5": 0.17073170731707318,
+        "xuv_hit_within_10pct": 0.21951219512195122,
+        "xuv_hit_within_20pct": 0.36585365853658536,
+        "simultaneous_20pct_20pct_0_1dex": 0.032520325203252036
+      }
+    },
+    "joint": {
+      "name": "oof_joint",
+      "mean_spearman_score_vs_negative_joint_distance": 0.14146341463414633,
+      "best_joint_candidate_rank": {
+        "mean": 2.4878048780487805,
+        "median": 2.0,
+        "mrr": 0.5505420054200543,
+        "recall_at_1": 0.2926829268292683,
+        "recall_at_3": 0.7479674796747967,
+        "recall_at_5": 1.0
+      },
+      "ranked_prefixes": {
+        "1": {
+          "coordinate_metrics": {
+            "xuv_mape_pct": 68.1276754833208,
+            "helium_mape_pct": 67.07577657842926,
+            "log_msw_mape_pct": 3.304049429282018,
+            "log_msw_mae_dex": 0.42034801739250577,
+            "linear_msw_mape_pct": 252.91807995655824
+          },
+          "mean_minimum_joint_distance": 1.3019934711793018,
+          "joint_coverage_distance_le_0_5": 0.0975609756097561,
+          "xuv_hit_within_10pct": 0.11382113821138211,
+          "xuv_hit_within_20pct": 0.2032520325203252
+        },
+        "3": {
+          "coordinate_metrics": {
+            "xuv_mape_pct": 49.530289485121074,
+            "helium_mape_pct": 55.80579189659205,
+            "log_msw_mape_pct": 2.3960492731539422,
+            "log_msw_mae_dex": 0.30186057221557155,
+            "linear_msw_mape_pct": 185.34784967255797
+          },
+          "mean_minimum_joint_distance": 1.03250749691598,
+          "joint_coverage_distance_le_0_5": 0.14634146341463414,
+          "xuv_hit_within_10pct": 0.17886178861788618,
+          "xuv_hit_within_20pct": 0.3333333333333333
+        },
+        "5": {
+          "coordinate_metrics": {
+            "xuv_mape_pct": 47.82605829530828,
+            "helium_mape_pct": 53.63360906779649,
+            "log_msw_mape_pct": 2.032796014740686,
+            "log_msw_mae_dex": 0.25694220399266254,
+            "linear_msw_mape_pct": 149.28775237821273
+          },
+          "mean_minimum_joint_distance": 0.9802692670845762,
+          "joint_coverage_distance_le_0_5": 0.17073170731707318,
+          "xuv_hit_within_10pct": 0.21951219512195122,
+          "xuv_hit_within_20pct": 0.36585365853658536
+        }
+      },
+      "top1_simultaneous_20pct_20pct_0_1dex": 0.008130081300813009,
+      "mmr_selected_5": {
+        "coordinate_metrics": {
+          "xuv_mape_pct": 47.82605829530828,
+          "helium_mape_pct": 53.63360906779649,
+          "log_msw_mape_pct": 2.032796014740686,
+          "log_msw_mae_dex": 0.25694220399266254,
+          "linear_msw_mape_pct": 149.28775237821273
+        },
+        "mean_minimum_joint_distance": 0.9802692670845762,
+        "joint_coverage_distance_le_0_5": 0.17073170731707318,
+        "xuv_hit_within_10pct": 0.21951219512195122,
+        "xuv_hit_within_20pct": 0.36585365853658536,
+        "simultaneous_20pct_20pct_0_1dex": 0.032520325203252036
+      }
+    },
+    "combined": {
+      "name": "oof_combined",
+      "mean_spearman_score_vs_negative_joint_distance": -0.10487804878048776,
+      "best_joint_candidate_rank": {
+        "mean": 2.894308943089431,
+        "median": 3.0,
+        "mrr": 0.45772357723577234,
+        "recall_at_1": 0.17886178861788618,
+        "recall_at_3": 0.6504065040650406,
+        "recall_at_5": 1.0
+      },
+      "ranked_prefixes": {
+        "1": {
+          "coordinate_metrics": {
+            "xuv_mape_pct": 65.87639870489946,
+            "helium_mape_pct": 71.1607906963648,
+            "log_msw_mape_pct": 3.246237529836302,
+            "log_msw_mae_dex": 0.41306215312023703,
+            "linear_msw_mape_pct": 254.8555522749194
+          },
+          "mean_minimum_joint_distance": 1.3647608641358642,
+          "joint_coverage_distance_le_0_5": 0.056910569105691054,
+          "xuv_hit_within_10pct": 0.10569105691056911,
+          "xuv_hit_within_20pct": 0.17073170731707318
+        },
+        "3": {
+          "coordinate_metrics": {
+            "xuv_mape_pct": 49.71687953835524,
+            "helium_mape_pct": 56.99393578040547,
+            "log_msw_mape_pct": 2.2133115302731636,
+            "log_msw_mae_dex": 0.27931773547231803,
+            "linear_msw_mape_pct": 168.51026464484528
+          },
+          "mean_minimum_joint_distance": 1.0451688816552034,
+          "joint_coverage_distance_le_0_5": 0.13008130081300814,
+          "xuv_hit_within_10pct": 0.21951219512195122,
+          "xuv_hit_within_20pct": 0.3252032520325203
+        },
+        "5": {
+          "coordinate_metrics": {
+            "xuv_mape_pct": 47.82605829530828,
+            "helium_mape_pct": 53.63360906779649,
+            "log_msw_mape_pct": 2.032796014740686,
+            "log_msw_mae_dex": 0.25694220399266254,
+            "linear_msw_mape_pct": 149.28775237821273
+          },
+          "mean_minimum_joint_distance": 0.9802692670845762,
+          "joint_coverage_distance_le_0_5": 0.17073170731707318,
+          "xuv_hit_within_10pct": 0.21951219512195122,
+          "xuv_hit_within_20pct": 0.36585365853658536
+        }
+      },
+      "top1_simultaneous_20pct_20pct_0_1dex": 0.008130081300813009,
+      "mmr_selected_5": {
+        "coordinate_metrics": {
+          "xuv_mape_pct": 47.82605829530828,
+          "helium_mape_pct": 53.63360906779649,
+          "log_msw_mape_pct": 2.032796014740686,
+          "log_msw_mae_dex": 0.25694220399266254,
+          "linear_msw_mape_pct": 149.28775237821273
+        },
+        "mean_minimum_joint_distance": 0.9802692670845762,
+        "joint_coverage_distance_le_0_5": 0.17073170731707318,
+        "xuv_hit_within_10pct": 0.21951219512195122,
+        "xuv_hit_within_20pct": 0.36585365853658536,
+        "simultaneous_20pct_20pct_0_1dex": 0.032520325203252036
+      }
+    },
+    "legacy": {
+      "name": "legacy_synthetic_pair_ranker",
+      "mean_spearman_score_vs_negative_joint_distance": 0.6691056910569104,
+      "best_joint_candidate_rank": {
+        "mean": 1.6016260162601625,
+        "median": 1.0,
+        "mrr": 0.7621951219512196,
+        "recall_at_1": 0.5853658536585366,
+        "recall_at_3": 0.991869918699187,
+        "recall_at_5": 1.0
+      },
+      "ranked_prefixes": {
+        "1": {
+          "coordinate_metrics": {
+            "xuv_mape_pct": 60.91973451119823,
+            "helium_mape_pct": 62.46402652288635,
+            "log_msw_mape_pct": 3.0328276146003734,
+            "log_msw_mae_dex": 0.3865640624597342,
+            "linear_msw_mape_pct": 214.47206529531306
+          },
+          "mean_minimum_joint_distance": 1.0707679878294194,
+          "joint_coverage_distance_le_0_5": 0.13821138211382114,
+          "xuv_hit_within_10pct": 0.13008130081300814,
+          "xuv_hit_within_20pct": 0.25203252032520324
+        },
+        "3": {
+          "coordinate_metrics": {
+            "xuv_mape_pct": 49.521439729211956,
+            "helium_mape_pct": 55.18758581362586,
+            "log_msw_mape_pct": 2.1526707348674816,
+            "log_msw_mae_dex": 0.2724642819479167,
+            "linear_msw_mape_pct": 153.6885645937229
+          },
+          "mean_minimum_joint_distance": 0.9805774426130826,
+          "joint_coverage_distance_le_0_5": 0.17073170731707318,
+          "xuv_hit_within_10pct": 0.17886178861788618,
+          "xuv_hit_within_20pct": 0.3333333333333333
+        },
+        "5": {
+          "coordinate_metrics": {
+            "xuv_mape_pct": 47.82605829530828,
+            "helium_mape_pct": 53.63360906779649,
+            "log_msw_mape_pct": 2.032796014740686,
+            "log_msw_mae_dex": 0.25694220399266254,
+            "linear_msw_mape_pct": 149.28775237821273
+          },
+          "mean_minimum_joint_distance": 0.9802692670845762,
+          "joint_coverage_distance_le_0_5": 0.17073170731707318,
+          "xuv_hit_within_10pct": 0.21951219512195122,
+          "xuv_hit_within_20pct": 0.36585365853658536
+        }
+      },
+      "top1_simultaneous_20pct_20pct_0_1dex": 0.024390243902439025,
+      "mmr_selected_5": {
+        "coordinate_metrics": {
+          "xuv_mape_pct": 47.82605829530828,
+          "helium_mape_pct": 53.63360906779649,
+          "log_msw_mape_pct": 2.032796014740686,
+          "log_msw_mae_dex": 0.25694220399266254,
+          "linear_msw_mape_pct": 149.28775237821273
+        },
+        "mean_minimum_joint_distance": 0.9802692670845762,
+        "joint_coverage_distance_le_0_5": 0.17073170731707318,
+        "xuv_hit_within_10pct": 0.21951219512195122,
+        "xuv_hit_within_20pct": 0.36585365853658536,
+        "simultaneous_20pct_20pct_0_1dex": 0.032520325203252036
+      }
+    }
+  }
+}
