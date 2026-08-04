@@ -1,0 +1,1219 @@
+{
+  "status": "development_pilot",
+  "warning": "The outer development split has been inspected in prior experiments and is not an untouched final test. Primary metrics exclude every dev row whose exact target/profile duplicate group intersects outer train.",
+  "dataset": {
+    "rows": 613,
+    "outer_train_rows": 490,
+    "outer_development_rows": 123,
+    "primary_nonoverlap_development_rows": 118,
+    "train_dev_crossing_duplicate_groups": 5,
+    "excluded_overlapping_development_rows": 5,
+    "oof_folds": 2,
+    "duplicate_row_excess_outer_train": 7,
+    "nontrivial_duplicate_groups_outer_train": 4
+  },
+  "candidate_generator": {
+    "seeds": [
+      0
+    ],
+    "heads_per_model": 5,
+    "candidate_count": 5,
+    "fixed_epochs": 2,
+    "checkpoint_selection": "none; fixed epoch",
+    "oof_models": [
+      {
+        "seed": 0,
+        "epochs": 2,
+        "last_train_loss": 1.3143725599561418,
+        "elapsed_seconds": 1.0117801250889897,
+        "planet_classifier_fit_rows": 230,
+        "planet_classifier_fit_prediction_rows": 0,
+        "stage": "oof",
+        "fold": 0,
+        "train_rows": 245,
+        "prediction_rows": 245
+      },
+      {
+        "seed": 0,
+        "epochs": 2,
+        "last_train_loss": 1.3577166790864905,
+        "elapsed_seconds": 0.7650652499869466,
+        "planet_classifier_fit_rows": 236,
+        "planet_classifier_fit_prediction_rows": 0,
+        "stage": "oof",
+        "fold": 1,
+        "train_rows": 245,
+        "prediction_rows": 245
+      }
+    ],
+    "final_models": [
+      {
+        "seed": 0,
+        "epochs": 2,
+        "last_train_loss": 1.2369544987775842,
+        "elapsed_seconds": 1.2108944579958916,
+        "planet_classifier_fit_rows": 466,
+        "planet_classifier_fit_prediction_rows": 0,
+        "stage": "final_refit",
+        "train_rows": 490,
+        "prediction_rows": 123
+      }
+    ]
+  },
+  "rankers": {
+    "xuv": {
+      "objective": "xuv",
+      "epoch_selection": "whole producer fold held out; each final model refit on all OOF objects for its selected fixed epoch count",
+      "final_refit_objects": 490,
+      "cross_validated_score_objects": 245,
+      "cross_validated_score_fraction": 0.5,
+      "models": [
+        {
+          "seed": 0,
+          "best_epoch": 8,
+          "best_internal_validation_loss": 1.5913410186767578,
+          "validation_producer_fold": 0,
+          "selection_train_objects": 245,
+          "selection_validation_objects": 245,
+          "selection_epochs_run": 8,
+          "cost_scales": {},
+          "refit_objects": 490,
+          "final_all_oof_loss": 1.5091418027877808,
+          "elapsed_seconds": 0.13958383281715214
+        }
+      ]
+    },
+    "joint": {
+      "objective": "joint",
+      "epoch_selection": "whole producer fold held out; each final model refit on all OOF objects for its selected fixed epoch count",
+      "final_refit_objects": 490,
+      "cross_validated_score_objects": 245,
+      "cross_validated_score_fraction": 0.5,
+      "models": [
+        {
+          "seed": 0,
+          "best_epoch": 8,
+          "best_internal_validation_loss": 1.6067345142364502,
+          "validation_producer_fold": 0,
+          "selection_train_objects": 245,
+          "selection_validation_objects": 245,
+          "selection_epochs_run": 8,
+          "cost_scales": {},
+          "refit_objects": 490,
+          "final_all_oof_loss": 1.5848308801651,
+          "elapsed_seconds": 0.13517212495207787
+        }
+      ]
+    },
+    "combined": {
+      "objective": "combined",
+      "epoch_selection": "whole producer fold held out; each final model refit on all OOF objects for its selected fixed epoch count",
+      "final_refit_objects": 490,
+      "cross_validated_score_objects": 245,
+      "cross_validated_score_fraction": 0.5,
+      "models": [
+        {
+          "seed": 0,
+          "best_epoch": 8,
+          "best_internal_validation_loss": 1.5959303379058838,
+          "validation_producer_fold": 0,
+          "selection_train_objects": 245,
+          "selection_validation_objects": 245,
+          "selection_epochs_run": 8,
+          "cost_scales": {
+            "xuv_scale_fit_on_ranker_train": 0.46532952785491943,
+            "joint_scale_fit_on_ranker_train": 1.4434525966644287
+          },
+          "refit_objects": 490,
+          "final_all_oof_loss": 1.5242398977279663,
+          "elapsed_seconds": 0.1228783328551799
+        }
+      ]
+    }
+  },
+  "ranker_producer_fold_cross_validation": {
+    "status": "objective-selection diagnostic; candidates and ranker scores are both out of fold for every covered object",
+    "evaluation": {
+      "xuv": {
+        "name": "producer_fold_cv_xuv",
+        "mean_spearman_score_vs_negative_joint_distance": -0.13265306122448978,
+        "mean_spearman_score_vs_negative_xuv_ape": -0.1551020408163265,
+        "joint_argmin_candidate_rank": {
+          "mean": 2.873469387755102,
+          "median": 2.0,
+          "mean_reciprocal_rank": 0.5123809523809524,
+          "recall_at_1": 0.2612244897959184,
+          "recall_at_3": 0.6122448979591837,
+          "recall_at_5": 1.0
+        },
+        "xuv_argmin_candidate_rank": {
+          "mean": 3.510204081632653,
+          "median": 5.0,
+          "mean_reciprocal_rank": 0.45904761904761915,
+          "recall_at_1": 0.2938775510204082,
+          "recall_at_3": 0.3836734693877551,
+          "recall_at_5": 1.0
+        },
+        "xuv_relevant_candidate_ranking": {
+          "within_10pct": {
+            "objects_with_relevant_candidate": 0.2163265306122449,
+            "mean_reciprocal_rank_first_relevant": 0.1119047619047619
+          },
+          "within_20pct": {
+            "objects_with_relevant_candidate": 0.32653061224489793,
+            "mean_reciprocal_rank_first_relevant": 0.21598639455782312
+          }
+        },
+        "ranked_coverage": {
+          "1": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 101.41338360313033,
+              "helium_mape_pct": 113.23821132703824,
+              "log_msw_mape_pct": 4.15539214014472,
+              "log_msw_mae_dex": 0.5350669354603858,
+              "linear_msw_mape_pct": 298.9687132999272
+            },
+            "mean_minimum_joint_distance": 1.5610253181825533,
+            "joint_coverage_distance_le_0_5": 0.02040816326530612,
+            "xuv_hit_within_10pct": 0.04897959183673469,
+            "xuv_hit_within_20pct": 0.1346938775510204,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.0
+          },
+          "3": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 89.32890375527873,
+              "helium_mape_pct": 96.64254925582976,
+              "log_msw_mape_pct": 3.569693029741466,
+              "log_msw_mae_dex": 0.4571356512135373,
+              "linear_msw_mape_pct": 268.21835329591477
+            },
+            "mean_minimum_joint_distance": 1.3611226557856582,
+            "joint_coverage_distance_le_0_5": 0.0653061224489796,
+            "xuv_hit_within_10pct": 0.1510204081632653,
+            "xuv_hit_within_20pct": 0.2816326530612245,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.0163265306122449
+          },
+          "5": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 86.013779757625,
+              "helium_mape_pct": 82.51820250156665,
+              "log_msw_mape_pct": 3.3990159394598214,
+              "log_msw_mae_dex": 0.4362395337678785,
+              "linear_msw_mape_pct": 219.13547287388607
+            },
+            "mean_minimum_joint_distance": 1.2903292738691543,
+            "joint_coverage_distance_le_0_5": 0.08571428571428572,
+            "xuv_hit_within_10pct": 0.2163265306122449,
+            "xuv_hit_within_20pct": 0.32653061224489793,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.02040816326530612
+          }
+        },
+        "actual_top1_metrics": {
+          "xuv_mape_pct": 101.41338360313033,
+          "helium_mape_pct": 113.23821132703824,
+          "log_msw_mape_pct": 4.15539214014472,
+          "log_msw_mae_dex": 0.5350669354603858,
+          "linear_msw_mape_pct": 298.9687132999272
+        },
+        "mmr_selected_5": {
+          "coordinate_oracle_metrics_at_5": {
+            "xuv_mape_pct": 86.013779757625,
+            "helium_mape_pct": 82.51820250156665,
+            "log_msw_mape_pct": 3.3990159394598214,
+            "log_msw_mae_dex": 0.4362395337678785,
+            "linear_msw_mape_pct": 219.13547287388607
+          },
+          "mean_minimum_joint_distance": 1.2903292738691543,
+          "joint_coverage_distance_le_0_5": 0.08571428571428572,
+          "xuv_hit_within_10pct": 0.2163265306122449,
+          "xuv_hit_within_20pct": 0.32653061224489793,
+          "simultaneous_20pct_20pct_0_1dex": 0.02040816326530612
+        }
+      },
+      "joint": {
+        "name": "producer_fold_cv_joint",
+        "mean_spearman_score_vs_negative_joint_distance": 0.3048979591836734,
+        "mean_spearman_score_vs_negative_xuv_ape": 0.29551020408163253,
+        "joint_argmin_candidate_rank": {
+          "mean": 2.489795918367347,
+          "median": 2.0,
+          "mean_reciprocal_rank": 0.6299319727891156,
+          "recall_at_1": 0.4775510204081633,
+          "recall_at_3": 0.6857142857142857,
+          "recall_at_5": 1.0
+        },
+        "xuv_argmin_candidate_rank": {
+          "mean": 2.7020408163265306,
+          "median": 2.0,
+          "mean_reciprocal_rank": 0.6025850340136054,
+          "recall_at_1": 0.45714285714285713,
+          "recall_at_3": 0.5877551020408164,
+          "recall_at_5": 1.0
+        },
+        "xuv_relevant_candidate_ranking": {
+          "within_10pct": {
+            "objects_with_relevant_candidate": 0.2163265306122449,
+            "mean_reciprocal_rank_first_relevant": 0.15931972789115645
+          },
+          "within_20pct": {
+            "objects_with_relevant_candidate": 0.32653061224489793,
+            "mean_reciprocal_rank_first_relevant": 0.23843537414965987
+          }
+        },
+        "ranked_coverage": {
+          "1": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 135.88717961457456,
+              "helium_mape_pct": 96.702808113652,
+              "log_msw_mape_pct": 4.041500184800627,
+              "log_msw_mae_dex": 0.5169903371333627,
+              "linear_msw_mape_pct": 328.5007034009294
+            },
+            "mean_minimum_joint_distance": 1.4478084221784429,
+            "joint_coverage_distance_le_0_5": 0.044897959183673466,
+            "xuv_hit_within_10pct": 0.1346938775510204,
+            "xuv_hit_within_20pct": 0.20816326530612245,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.004081632653061225
+          },
+          "3": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 117.19181319136405,
+              "helium_mape_pct": 84.41573414603886,
+              "log_msw_mape_pct": 3.6475514468916796,
+              "log_msw_mae_dex": 0.46649307268274215,
+              "linear_msw_mape_pct": 286.3242864575554
+            },
+            "mean_minimum_joint_distance": 1.3628985722970055,
+            "joint_coverage_distance_le_0_5": 0.08163265306122448,
+            "xuv_hit_within_10pct": 0.16326530612244897,
+            "xuv_hit_within_20pct": 0.24081632653061225,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.02040816326530612
+          },
+          "5": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 86.013779757625,
+              "helium_mape_pct": 82.51820250156665,
+              "log_msw_mape_pct": 3.3990159394598214,
+              "log_msw_mae_dex": 0.4362395337678785,
+              "linear_msw_mape_pct": 219.13547287388607
+            },
+            "mean_minimum_joint_distance": 1.2903292738691543,
+            "joint_coverage_distance_le_0_5": 0.08571428571428572,
+            "xuv_hit_within_10pct": 0.2163265306122449,
+            "xuv_hit_within_20pct": 0.32653061224489793,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.02040816326530612
+          }
+        },
+        "actual_top1_metrics": {
+          "xuv_mape_pct": 135.88717961457456,
+          "helium_mape_pct": 96.702808113652,
+          "log_msw_mape_pct": 4.041500184800627,
+          "log_msw_mae_dex": 0.5169903371333627,
+          "linear_msw_mape_pct": 328.5007034009294
+        },
+        "mmr_selected_5": {
+          "coordinate_oracle_metrics_at_5": {
+            "xuv_mape_pct": 86.013779757625,
+            "helium_mape_pct": 82.51820250156665,
+            "log_msw_mape_pct": 3.3990159394598214,
+            "log_msw_mae_dex": 0.4362395337678785,
+            "linear_msw_mape_pct": 219.13547287388607
+          },
+          "mean_minimum_joint_distance": 1.2903292738691543,
+          "joint_coverage_distance_le_0_5": 0.08571428571428572,
+          "xuv_hit_within_10pct": 0.2163265306122449,
+          "xuv_hit_within_20pct": 0.32653061224489793,
+          "simultaneous_20pct_20pct_0_1dex": 0.02040816326530612
+        }
+      },
+      "combined": {
+        "name": "producer_fold_cv_combined",
+        "mean_spearman_score_vs_negative_joint_distance": -0.11346938775510203,
+        "mean_spearman_score_vs_negative_xuv_ape": -0.14857142857142852,
+        "joint_argmin_candidate_rank": {
+          "mean": 2.840816326530612,
+          "median": 2.0,
+          "mean_reciprocal_rank": 0.5113605442176871,
+          "recall_at_1": 0.2571428571428571,
+          "recall_at_3": 0.6163265306122448,
+          "recall_at_5": 1.0
+        },
+        "xuv_argmin_candidate_rank": {
+          "mean": 3.4122448979591837,
+          "median": 4.0,
+          "mean_reciprocal_rank": 0.4629251700680273,
+          "recall_at_1": 0.2897959183673469,
+          "recall_at_3": 0.40816326530612246,
+          "recall_at_5": 1.0
+        },
+        "xuv_relevant_candidate_ranking": {
+          "within_10pct": {
+            "objects_with_relevant_candidate": 0.2163265306122449,
+            "mean_reciprocal_rank_first_relevant": 0.11272108843537415
+          },
+          "within_20pct": {
+            "objects_with_relevant_candidate": 0.32653061224489793,
+            "mean_reciprocal_rank_first_relevant": 0.216734693877551
+          }
+        },
+        "ranked_coverage": {
+          "1": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 103.03134365475071,
+              "helium_mape_pct": 112.9789114733929,
+              "log_msw_mape_pct": 4.154479132693019,
+              "log_msw_mae_dex": 0.5348022565391137,
+              "linear_msw_mape_pct": 301.9604254808425
+            },
+            "mean_minimum_joint_distance": 1.557717397758814,
+            "joint_coverage_distance_le_0_5": 0.02040816326530612,
+            "xuv_hit_within_10pct": 0.04897959183673469,
+            "xuv_hit_within_20pct": 0.1346938775510204,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.0
+          },
+          "3": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 89.15986530986221,
+              "helium_mape_pct": 96.47626058209521,
+              "log_msw_mape_pct": 3.5630666732705,
+              "log_msw_mae_dex": 0.4562389158793137,
+              "linear_msw_mape_pct": 268.5774908296768
+            },
+            "mean_minimum_joint_distance": 1.35984535553199,
+            "joint_coverage_distance_le_0_5": 0.0653061224489796,
+            "xuv_hit_within_10pct": 0.1510204081632653,
+            "xuv_hit_within_20pct": 0.2857142857142857,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.0163265306122449
+          },
+          "5": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 86.013779757625,
+              "helium_mape_pct": 82.51820250156665,
+              "log_msw_mape_pct": 3.3990159394598214,
+              "log_msw_mae_dex": 0.4362395337678785,
+              "linear_msw_mape_pct": 219.13547287388607
+            },
+            "mean_minimum_joint_distance": 1.2903292738691543,
+            "joint_coverage_distance_le_0_5": 0.08571428571428572,
+            "xuv_hit_within_10pct": 0.2163265306122449,
+            "xuv_hit_within_20pct": 0.32653061224489793,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.02040816326530612
+          }
+        },
+        "actual_top1_metrics": {
+          "xuv_mape_pct": 103.03134365475071,
+          "helium_mape_pct": 112.9789114733929,
+          "log_msw_mape_pct": 4.154479132693019,
+          "log_msw_mae_dex": 0.5348022565391137,
+          "linear_msw_mape_pct": 301.9604254808425
+        },
+        "mmr_selected_5": {
+          "coordinate_oracle_metrics_at_5": {
+            "xuv_mape_pct": 86.013779757625,
+            "helium_mape_pct": 82.51820250156665,
+            "log_msw_mape_pct": 3.3990159394598214,
+            "log_msw_mae_dex": 0.4362395337678785,
+            "linear_msw_mape_pct": 219.13547287388607
+          },
+          "mean_minimum_joint_distance": 1.2903292738691543,
+          "joint_coverage_distance_le_0_5": 0.08571428571428572,
+          "xuv_hit_within_10pct": 0.2163265306122449,
+          "xuv_hit_within_20pct": 0.32653061224489793,
+          "simultaneous_20pct_20pct_0_1dex": 0.02040816326530612
+        }
+      }
+    }
+  },
+  "legacy_baseline_status": "included; exact outer-train ID set and saved preprocessing match",
+  "primary_nonoverlap_evaluation": {
+    "oracle_all_candidates_coordinate_metrics": {
+      "xuv_mape_pct": 47.062074234683585,
+      "helium_mape_pct": 52.088137061375775,
+      "log_msw_mape_pct": 1.9320710447493161,
+      "log_msw_mae_dex": 0.24643890965534598,
+      "linear_msw_mape_pct": 95.24583790905533
+    },
+    "rankers": {
+      "xuv": {
+        "name": "oof_xuv",
+        "mean_spearman_score_vs_negative_joint_distance": -0.14915254237288134,
+        "mean_spearman_score_vs_negative_xuv_ape": -0.20423728813559314,
+        "joint_argmin_candidate_rank": {
+          "mean": 2.9152542372881354,
+          "median": 3.0,
+          "mean_reciprocal_rank": 0.45932203389830517,
+          "recall_at_1": 0.19491525423728814,
+          "recall_at_3": 0.6864406779661016,
+          "recall_at_5": 1.0
+        },
+        "xuv_argmin_candidate_rank": {
+          "mean": 3.1610169491525424,
+          "median": 3.0,
+          "mean_reciprocal_rank": 0.4713276836158193,
+          "recall_at_1": 0.2627118644067797,
+          "recall_at_3": 0.559322033898305,
+          "recall_at_5": 1.0
+        },
+        "xuv_relevant_candidate_ranking": {
+          "within_10pct": {
+            "objects_with_relevant_candidate": 0.211864406779661,
+            "mean_reciprocal_rank_first_relevant": 0.1365819209039548
+          },
+          "within_20pct": {
+            "objects_with_relevant_candidate": 0.3644067796610169,
+            "mean_reciprocal_rank_first_relevant": 0.22824858757062147
+          }
+        },
+        "ranked_coverage": {
+          "1": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 65.80128670573151,
+              "helium_mape_pct": 69.42060712178308,
+              "log_msw_mape_pct": 3.0348412917524836,
+              "log_msw_mae_dex": 0.38976064651269593,
+              "linear_msw_mape_pct": 153.2026626806783
+            },
+            "mean_minimum_joint_distance": 1.346847150255197,
+            "joint_coverage_distance_le_0_5": 0.059322033898305086,
+            "xuv_hit_within_10pct": 0.09322033898305085,
+            "xuv_hit_within_20pct": 0.16101694915254236,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.00847457627118644
+          },
+          "3": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 49.44043862655248,
+              "helium_mape_pct": 53.63033557363713,
+              "log_msw_mape_pct": 2.27036339814991,
+              "log_msw_mae_dex": 0.29186288331286403,
+              "linear_msw_mape_pct": 102.20207837027712
+            },
+            "mean_minimum_joint_distance": 1.0333921996146325,
+            "joint_coverage_distance_le_0_5": 0.1440677966101695,
+            "xuv_hit_within_10pct": 0.19491525423728814,
+            "xuv_hit_within_20pct": 0.3220338983050847,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.01694915254237288
+          },
+          "5": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 47.062074234683585,
+              "helium_mape_pct": 52.088137061375775,
+              "log_msw_mape_pct": 1.9320710447493161,
+              "log_msw_mae_dex": 0.24643890965534598,
+              "linear_msw_mape_pct": 95.24583790905533
+            },
+            "mean_minimum_joint_distance": 0.9611062345777738,
+            "joint_coverage_distance_le_0_5": 0.1694915254237288,
+            "xuv_hit_within_10pct": 0.211864406779661,
+            "xuv_hit_within_20pct": 0.3644067796610169,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.03389830508474576
+          }
+        },
+        "actual_top1_metrics": {
+          "xuv_mape_pct": 65.80128670573151,
+          "helium_mape_pct": 69.42060712178308,
+          "log_msw_mape_pct": 3.0348412917524836,
+          "log_msw_mae_dex": 0.38976064651269593,
+          "linear_msw_mape_pct": 153.2026626806783
+        },
+        "mmr_selected_5": {
+          "coordinate_oracle_metrics_at_5": {
+            "xuv_mape_pct": 47.062074234683585,
+            "helium_mape_pct": 52.088137061375775,
+            "log_msw_mape_pct": 1.9320710447493161,
+            "log_msw_mae_dex": 0.24643890965534598,
+            "linear_msw_mape_pct": 95.24583790905533
+          },
+          "mean_minimum_joint_distance": 0.9611062345777738,
+          "joint_coverage_distance_le_0_5": 0.1694915254237288,
+          "xuv_hit_within_10pct": 0.211864406779661,
+          "xuv_hit_within_20pct": 0.3644067796610169,
+          "simultaneous_20pct_20pct_0_1dex": 0.03389830508474576
+        }
+      },
+      "joint": {
+        "name": "oof_joint",
+        "mean_spearman_score_vs_negative_joint_distance": 0.48813559322033895,
+        "mean_spearman_score_vs_negative_xuv_ape": 0.24237288135593213,
+        "joint_argmin_candidate_rank": {
+          "mean": 2.0508474576271185,
+          "median": 2.0,
+          "mean_reciprocal_rank": 0.6701977401129944,
+          "recall_at_1": 0.4745762711864407,
+          "recall_at_3": 0.8135593220338984,
+          "recall_at_5": 1.0
+        },
+        "xuv_argmin_candidate_rank": {
+          "mean": 2.4661016949152543,
+          "median": 2.0,
+          "mean_reciprocal_rank": 0.5731638418079097,
+          "recall_at_1": 0.3389830508474576,
+          "recall_at_3": 0.711864406779661,
+          "recall_at_5": 1.0
+        },
+        "xuv_relevant_candidate_ranking": {
+          "within_10pct": {
+            "objects_with_relevant_candidate": 0.211864406779661,
+            "mean_reciprocal_rank_first_relevant": 0.12867231638418078
+          },
+          "within_20pct": {
+            "objects_with_relevant_candidate": 0.3644067796610169,
+            "mean_reciprocal_rank_first_relevant": 0.2593220338983051
+          }
+        },
+        "ranked_coverage": {
+          "1": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 71.4840209953699,
+              "helium_mape_pct": 65.78203201963385,
+              "log_msw_mape_pct": 3.2141507243552034,
+              "log_msw_mae_dex": 0.40792657551079425,
+              "linear_msw_mape_pct": 226.73902526547738
+            },
+            "mean_minimum_joint_distance": 1.129300696452521,
+            "joint_coverage_distance_le_0_5": 0.0847457627118644,
+            "xuv_hit_within_10pct": 0.09322033898305085,
+            "xuv_hit_within_20pct": 0.211864406779661,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.01694915254237288
+          },
+          "3": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 53.98997331035902,
+              "helium_mape_pct": 55.70077565158519,
+              "log_msw_mape_pct": 2.306020107065757,
+              "log_msw_mae_dex": 0.29258925635539806,
+              "linear_msw_mape_pct": 137.28474638360728
+            },
+            "mean_minimum_joint_distance": 1.007059226853791,
+            "joint_coverage_distance_le_0_5": 0.15254237288135594,
+            "xuv_hit_within_10pct": 0.1271186440677966,
+            "xuv_hit_within_20pct": 0.2542372881355932,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.025423728813559324
+          },
+          "5": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 47.062074234683585,
+              "helium_mape_pct": 52.088137061375775,
+              "log_msw_mape_pct": 1.9320710447493161,
+              "log_msw_mae_dex": 0.24643890965534598,
+              "linear_msw_mape_pct": 95.24583790905533
+            },
+            "mean_minimum_joint_distance": 0.9611062345777738,
+            "joint_coverage_distance_le_0_5": 0.1694915254237288,
+            "xuv_hit_within_10pct": 0.211864406779661,
+            "xuv_hit_within_20pct": 0.3644067796610169,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.03389830508474576
+          }
+        },
+        "actual_top1_metrics": {
+          "xuv_mape_pct": 71.4840209953699,
+          "helium_mape_pct": 65.78203201963385,
+          "log_msw_mape_pct": 3.2141507243552034,
+          "log_msw_mae_dex": 0.40792657551079425,
+          "linear_msw_mape_pct": 226.73902526547738
+        },
+        "mmr_selected_5": {
+          "coordinate_oracle_metrics_at_5": {
+            "xuv_mape_pct": 47.062074234683585,
+            "helium_mape_pct": 52.088137061375775,
+            "log_msw_mape_pct": 1.9320710447493161,
+            "log_msw_mae_dex": 0.24643890965534598,
+            "linear_msw_mape_pct": 95.24583790905533
+          },
+          "mean_minimum_joint_distance": 0.9611062345777738,
+          "joint_coverage_distance_le_0_5": 0.1694915254237288,
+          "xuv_hit_within_10pct": 0.211864406779661,
+          "xuv_hit_within_20pct": 0.3644067796610169,
+          "simultaneous_20pct_20pct_0_1dex": 0.03389830508474576
+        }
+      },
+      "combined": {
+        "name": "oof_combined",
+        "mean_spearman_score_vs_negative_joint_distance": -0.13389830508474573,
+        "mean_spearman_score_vs_negative_xuv_ape": -0.1915254237288135,
+        "joint_argmin_candidate_rank": {
+          "mean": 2.8220338983050848,
+          "median": 3.0,
+          "mean_reciprocal_rank": 0.4687853107344633,
+          "recall_at_1": 0.19491525423728814,
+          "recall_at_3": 0.711864406779661,
+          "recall_at_5": 1.0
+        },
+        "xuv_argmin_candidate_rank": {
+          "mean": 3.059322033898305,
+          "median": 3.0,
+          "mean_reciprocal_rank": 0.477542372881356,
+          "recall_at_1": 0.2627118644067797,
+          "recall_at_3": 0.5932203389830508,
+          "recall_at_5": 1.0
+        },
+        "xuv_relevant_candidate_ranking": {
+          "within_10pct": {
+            "objects_with_relevant_candidate": 0.211864406779661,
+            "mean_reciprocal_rank_first_relevant": 0.1405367231638418
+          },
+          "within_20pct": {
+            "objects_with_relevant_candidate": 0.3644067796610169,
+            "mean_reciprocal_rank_first_relevant": 0.23290960451977402
+          }
+        },
+        "ranked_coverage": {
+          "1": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 65.73849360438633,
+              "helium_mape_pct": 69.52535285654105,
+              "log_msw_mape_pct": 3.0474974661483847,
+              "log_msw_mae_dex": 0.39128940875679263,
+              "linear_msw_mape_pct": 153.7319103478087
+            },
+            "mean_minimum_joint_distance": 1.3474665843592195,
+            "joint_coverage_distance_le_0_5": 0.05084745762711865,
+            "xuv_hit_within_10pct": 0.09322033898305085,
+            "xuv_hit_within_20pct": 0.16101694915254236,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.00847457627118644
+          },
+          "3": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 49.08630968826992,
+              "helium_mape_pct": 53.765051164323005,
+              "log_msw_mape_pct": 2.094823989813305,
+              "log_msw_mae_dex": 0.26784241190257063,
+              "linear_msw_mape_pct": 101.22478130741024
+            },
+            "mean_minimum_joint_distance": 1.0109676858901753,
+            "joint_coverage_distance_le_0_5": 0.15254237288135594,
+            "xuv_hit_within_10pct": 0.2033898305084746,
+            "xuv_hit_within_20pct": 0.3389830508474576,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.025423728813559324
+          },
+          "5": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 47.062074234683585,
+              "helium_mape_pct": 52.088137061375775,
+              "log_msw_mape_pct": 1.9320710447493161,
+              "log_msw_mae_dex": 0.24643890965534598,
+              "linear_msw_mape_pct": 95.24583790905533
+            },
+            "mean_minimum_joint_distance": 0.9611062345777738,
+            "joint_coverage_distance_le_0_5": 0.1694915254237288,
+            "xuv_hit_within_10pct": 0.211864406779661,
+            "xuv_hit_within_20pct": 0.3644067796610169,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.03389830508474576
+          }
+        },
+        "actual_top1_metrics": {
+          "xuv_mape_pct": 65.73849360438633,
+          "helium_mape_pct": 69.52535285654105,
+          "log_msw_mape_pct": 3.0474974661483847,
+          "log_msw_mae_dex": 0.39128940875679263,
+          "linear_msw_mape_pct": 153.7319103478087
+        },
+        "mmr_selected_5": {
+          "coordinate_oracle_metrics_at_5": {
+            "xuv_mape_pct": 47.062074234683585,
+            "helium_mape_pct": 52.088137061375775,
+            "log_msw_mape_pct": 1.9320710447493161,
+            "log_msw_mae_dex": 0.24643890965534598,
+            "linear_msw_mape_pct": 95.24583790905533
+          },
+          "mean_minimum_joint_distance": 0.9611062345777738,
+          "joint_coverage_distance_le_0_5": 0.1694915254237288,
+          "xuv_hit_within_10pct": 0.211864406779661,
+          "xuv_hit_within_20pct": 0.3644067796610169,
+          "simultaneous_20pct_20pct_0_1dex": 0.03389830508474576
+        }
+      },
+      "legacy": {
+        "name": "legacy_synthetic_pair_ranker",
+        "mean_spearman_score_vs_negative_joint_distance": 0.6711864406779662,
+        "mean_spearman_score_vs_negative_xuv_ape": 0.31016949152542367,
+        "joint_argmin_candidate_rank": {
+          "mean": 1.576271186440678,
+          "median": 1.0,
+          "mean_reciprocal_rank": 0.7690677966101694,
+          "recall_at_1": 0.5932203389830508,
+          "recall_at_3": 0.9915254237288136,
+          "recall_at_5": 1.0
+        },
+        "xuv_argmin_candidate_rank": {
+          "mean": 2.288135593220339,
+          "median": 2.0,
+          "mean_reciprocal_rank": 0.6300847457627117,
+          "recall_at_1": 0.4406779661016949,
+          "recall_at_3": 0.7796610169491526,
+          "recall_at_5": 1.0
+        },
+        "xuv_relevant_candidate_ranking": {
+          "within_10pct": {
+            "objects_with_relevant_candidate": 0.211864406779661,
+            "mean_reciprocal_rank_first_relevant": 0.15621468926553672
+          },
+          "within_20pct": {
+            "objects_with_relevant_candidate": 0.3644067796610169,
+            "mean_reciprocal_rank_first_relevant": 0.2939265536723164
+          }
+        },
+        "ranked_coverage": {
+          "1": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 60.603492558856765,
+              "helium_mape_pct": 60.7490204667012,
+              "log_msw_mape_pct": 2.8912813420514656,
+              "log_msw_mae_dex": 0.37141408807531845,
+              "linear_msw_mape_pct": 134.7583885016227
+            },
+            "mean_minimum_joint_distance": 1.0524566629366359,
+            "joint_coverage_distance_le_0_5": 0.13559322033898305,
+            "xuv_hit_within_10pct": 0.1271186440677966,
+            "xuv_hit_within_20pct": 0.2457627118644068,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.025423728813559324
+          },
+          "3": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 48.808890987433756,
+              "helium_mape_pct": 53.56605143837774,
+              "log_msw_mape_pct": 2.048781148780778,
+              "log_msw_mae_dex": 0.2615966099847641,
+              "linear_msw_mape_pct": 99.62929421325633
+            },
+            "mean_minimum_joint_distance": 0.9614274683913864,
+            "joint_coverage_distance_le_0_5": 0.1694915254237288,
+            "xuv_hit_within_10pct": 0.1694915254237288,
+            "xuv_hit_within_20pct": 0.3305084745762712,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.03389830508474576
+          },
+          "5": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 47.062074234683585,
+              "helium_mape_pct": 52.088137061375775,
+              "log_msw_mape_pct": 1.9320710447493161,
+              "log_msw_mae_dex": 0.24643890965534598,
+              "linear_msw_mape_pct": 95.24583790905533
+            },
+            "mean_minimum_joint_distance": 0.9611062345777738,
+            "joint_coverage_distance_le_0_5": 0.1694915254237288,
+            "xuv_hit_within_10pct": 0.211864406779661,
+            "xuv_hit_within_20pct": 0.3644067796610169,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.03389830508474576
+          }
+        },
+        "actual_top1_metrics": {
+          "xuv_mape_pct": 60.603492558856765,
+          "helium_mape_pct": 60.7490204667012,
+          "log_msw_mape_pct": 2.8912813420514656,
+          "log_msw_mae_dex": 0.37141408807531845,
+          "linear_msw_mape_pct": 134.7583885016227
+        },
+        "mmr_selected_5": {
+          "coordinate_oracle_metrics_at_5": {
+            "xuv_mape_pct": 47.062074234683585,
+            "helium_mape_pct": 52.088137061375775,
+            "log_msw_mape_pct": 1.9320710447493161,
+            "log_msw_mae_dex": 0.24643890965534598,
+            "linear_msw_mape_pct": 95.24583790905533
+          },
+          "mean_minimum_joint_distance": 0.9611062345777738,
+          "joint_coverage_distance_le_0_5": 0.1694915254237288,
+          "xuv_hit_within_10pct": 0.211864406779661,
+          "xuv_hit_within_20pct": 0.3644067796610169,
+          "simultaneous_20pct_20pct_0_1dex": 0.03389830508474576
+        }
+      }
+    }
+  },
+  "secondary_historical_123_evaluation": {
+    "status": "comparability only; includes duplicate-overlap rows and is not the primary leakage-free score",
+    "oracle_all_candidates_coordinate_metrics": {
+      "xuv_mape_pct": 47.82605829530828,
+      "helium_mape_pct": 53.63360906779649,
+      "log_msw_mape_pct": 2.032796014740686,
+      "log_msw_mae_dex": 0.25694220399266254,
+      "linear_msw_mape_pct": 149.28775237821273
+    },
+    "rankers": {
+      "xuv": {
+        "name": "oof_xuv",
+        "mean_spearman_score_vs_negative_joint_distance": -0.13252032520325202,
+        "mean_spearman_score_vs_negative_xuv_ape": -0.1642276422764227,
+        "joint_argmin_candidate_rank": {
+          "mean": 2.894308943089431,
+          "median": 3.0,
+          "mean_reciprocal_rank": 0.4616531165311654,
+          "recall_at_1": 0.1951219512195122,
+          "recall_at_3": 0.6910569105691057,
+          "recall_at_5": 1.0
+        },
+        "xuv_argmin_candidate_rank": {
+          "mean": 3.089430894308943,
+          "median": 3.0,
+          "mean_reciprocal_rank": 0.4846883468834689,
+          "recall_at_1": 0.2764227642276423,
+          "recall_at_3": 0.5772357723577236,
+          "recall_at_5": 1.0
+        },
+        "xuv_relevant_candidate_ranking": {
+          "within_10pct": {
+            "objects_with_relevant_candidate": 0.21951219512195122,
+            "mean_reciprocal_rank_first_relevant": 0.14728997289972898
+          },
+          "within_20pct": {
+            "objects_with_relevant_candidate": 0.36585365853658536,
+            "mean_reciprocal_rank_first_relevant": 0.23523035230352304
+          }
+        },
+        "ranked_coverage": {
+          "1": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 65.85669497620141,
+              "helium_mape_pct": 71.01808356114886,
+              "log_msw_mape_pct": 3.1649708951790876,
+              "log_msw_mae_dex": 0.4034783178021275,
+              "linear_msw_mape_pct": 231.90354771892063
+            },
+            "mean_minimum_joint_distance": 1.3535470101101543,
+            "joint_coverage_distance_le_0_5": 0.06504065040650407,
+            "xuv_hit_within_10pct": 0.10569105691056911,
+            "xuv_hit_within_20pct": 0.17073170731707318,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.008130081300813009
+          },
+          "3": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 50.1077412078329,
+              "helium_mape_pct": 55.11311658362447,
+              "log_msw_mape_pct": 2.3687826824398357,
+              "log_msw_mae_dex": 0.30195868090485023,
+              "linear_msw_mape_pct": 156.33235228258516
+            },
+            "mean_minimum_joint_distance": 1.0497122535111816,
+            "joint_coverage_distance_le_0_5": 0.14634146341463414,
+            "xuv_hit_within_10pct": 0.2032520325203252,
+            "xuv_hit_within_20pct": 0.3252032520325203,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.016260162601626018
+          },
+          "5": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 47.82605829530828,
+              "helium_mape_pct": 53.63360906779649,
+              "log_msw_mape_pct": 2.032796014740686,
+              "log_msw_mae_dex": 0.25694220399266254,
+              "linear_msw_mape_pct": 149.28775237821273
+            },
+            "mean_minimum_joint_distance": 0.9802692670845762,
+            "joint_coverage_distance_le_0_5": 0.17073170731707318,
+            "xuv_hit_within_10pct": 0.21951219512195122,
+            "xuv_hit_within_20pct": 0.36585365853658536,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.032520325203252036
+          }
+        },
+        "actual_top1_metrics": {
+          "xuv_mape_pct": 65.85669497620141,
+          "helium_mape_pct": 71.01808356114886,
+          "log_msw_mape_pct": 3.1649708951790876,
+          "log_msw_mae_dex": 0.4034783178021275,
+          "linear_msw_mape_pct": 231.90354771892063
+        },
+        "mmr_selected_5": {
+          "coordinate_oracle_metrics_at_5": {
+            "xuv_mape_pct": 47.82605829530828,
+            "helium_mape_pct": 53.63360906779649,
+            "log_msw_mape_pct": 2.032796014740686,
+            "log_msw_mae_dex": 0.25694220399266254,
+            "linear_msw_mape_pct": 149.28775237821273
+          },
+          "mean_minimum_joint_distance": 0.9802692670845762,
+          "joint_coverage_distance_le_0_5": 0.17073170731707318,
+          "xuv_hit_within_10pct": 0.21951219512195122,
+          "xuv_hit_within_20pct": 0.36585365853658536,
+          "simultaneous_20pct_20pct_0_1dex": 0.032520325203252036
+        }
+      },
+      "joint": {
+        "name": "oof_joint",
+        "mean_spearman_score_vs_negative_joint_distance": 0.489430894308943,
+        "mean_spearman_score_vs_negative_xuv_ape": 0.23658536585365852,
+        "joint_argmin_candidate_rank": {
+          "mean": 2.040650406504065,
+          "median": 2.0,
+          "mean_reciprocal_rank": 0.6734417344173441,
+          "recall_at_1": 0.4796747967479675,
+          "recall_at_3": 0.8130081300813008,
+          "recall_at_5": 1.0
+        },
+        "xuv_argmin_candidate_rank": {
+          "mean": 2.4878048780487805,
+          "median": 2.0,
+          "mean_reciprocal_rank": 0.5720867208672087,
+          "recall_at_1": 0.34146341463414637,
+          "recall_at_3": 0.7073170731707317,
+          "recall_at_5": 1.0
+        },
+        "xuv_relevant_candidate_ranking": {
+          "within_10pct": {
+            "objects_with_relevant_candidate": 0.21951219512195122,
+            "mean_reciprocal_rank_first_relevant": 0.12913279132791328
+          },
+          "within_20pct": {
+            "objects_with_relevant_candidate": 0.36585365853658536,
+            "mean_reciprocal_rank_first_relevant": 0.25853658536585367
+          }
+        },
+        "ranked_coverage": {
+          "1": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 71.51830092831051,
+              "helium_mape_pct": 67.0170092117035,
+              "log_msw_mape_pct": 3.331738430727177,
+              "log_msw_mae_dex": 0.42040058503924055,
+              "linear_msw_mape_pct": 279.4552058882529
+            },
+            "mean_minimum_joint_distance": 1.1422337354310432,
+            "joint_coverage_distance_le_0_5": 0.08943089430894309,
+            "xuv_hit_within_10pct": 0.08943089430894309,
+            "xuv_hit_within_20pct": 0.21138211382113822,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.016260162601626018
+          },
+          "3": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 54.65224483410173,
+              "helium_mape_pct": 57.099392430761654,
+              "log_msw_mape_pct": 2.4128043640232715,
+              "log_msw_mae_dex": 0.30383805658231244,
+              "linear_msw_mape_pct": 190.63697693659233
+            },
+            "mean_minimum_joint_distance": 1.0244497267975285,
+            "joint_coverage_distance_le_0_5": 0.15447154471544716,
+            "xuv_hit_within_10pct": 0.13008130081300814,
+            "xuv_hit_within_20pct": 0.25203252032520324,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.024390243902439025
+          },
+          "5": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 47.82605829530828,
+              "helium_mape_pct": 53.63360906779649,
+              "log_msw_mape_pct": 2.032796014740686,
+              "log_msw_mae_dex": 0.25694220399266254,
+              "linear_msw_mape_pct": 149.28775237821273
+            },
+            "mean_minimum_joint_distance": 0.9802692670845762,
+            "joint_coverage_distance_le_0_5": 0.17073170731707318,
+            "xuv_hit_within_10pct": 0.21951219512195122,
+            "xuv_hit_within_20pct": 0.36585365853658536,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.032520325203252036
+          }
+        },
+        "actual_top1_metrics": {
+          "xuv_mape_pct": 71.51830092831051,
+          "helium_mape_pct": 67.0170092117035,
+          "log_msw_mape_pct": 3.331738430727177,
+          "log_msw_mae_dex": 0.42040058503924055,
+          "linear_msw_mape_pct": 279.4552058882529
+        },
+        "mmr_selected_5": {
+          "coordinate_oracle_metrics_at_5": {
+            "xuv_mape_pct": 47.82605829530828,
+            "helium_mape_pct": 53.63360906779649,
+            "log_msw_mape_pct": 2.032796014740686,
+            "log_msw_mae_dex": 0.25694220399266254,
+            "linear_msw_mape_pct": 149.28775237821273
+          },
+          "mean_minimum_joint_distance": 0.9802692670845762,
+          "joint_coverage_distance_le_0_5": 0.17073170731707318,
+          "xuv_hit_within_10pct": 0.21951219512195122,
+          "xuv_hit_within_20pct": 0.36585365853658536,
+          "simultaneous_20pct_20pct_0_1dex": 0.032520325203252036
+        }
+      },
+      "combined": {
+        "name": "oof_combined",
+        "mean_spearman_score_vs_negative_joint_distance": -0.11951219512195119,
+        "mean_spearman_score_vs_negative_xuv_ape": -0.15284552845528454,
+        "joint_argmin_candidate_rank": {
+          "mean": 2.813008130081301,
+          "median": 3.0,
+          "mean_reciprocal_rank": 0.47032520325203253,
+          "recall_at_1": 0.1951219512195122,
+          "recall_at_3": 0.7154471544715447,
+          "recall_at_5": 1.0
+        },
+        "xuv_argmin_candidate_rank": {
+          "mean": 2.991869918699187,
+          "median": 3.0,
+          "mean_reciprocal_rank": 0.49065040650406505,
+          "recall_at_1": 0.2764227642276423,
+          "recall_at_3": 0.6097560975609756,
+          "recall_at_5": 1.0
+        },
+        "xuv_relevant_candidate_ranking": {
+          "within_10pct": {
+            "objects_with_relevant_candidate": 0.21951219512195122,
+            "mean_reciprocal_rank_first_relevant": 0.1510840108401084
+          },
+          "within_20pct": {
+            "objects_with_relevant_candidate": 0.36585365853658536,
+            "mean_reciprocal_rank_first_relevant": 0.23970189701897018
+          }
+        },
+        "ranked_coverage": {
+          "1": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 65.79645443995157,
+              "helium_mape_pct": 71.11857133920934,
+              "log_msw_mape_pct": 3.177112590941008,
+              "log_msw_mae_dex": 0.40494493523955366,
+              "linear_msw_mape_pct": 232.41128125324087
+            },
+            "mean_minimum_joint_distance": 1.3541412639660457,
+            "joint_coverage_distance_le_0_5": 0.056910569105691054,
+            "xuv_hit_within_10pct": 0.10569105691056911,
+            "xuv_hit_within_20pct": 0.17073170731707318,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.008130081300813009
+          },
+          "3": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 49.76800775484638,
+              "helium_mape_pct": 55.24235593078652,
+              "log_msw_mape_pct": 2.2003790224095963,
+              "log_msw_mae_dex": 0.2789146514218046,
+              "linear_msw_mape_pct": 155.39478274259906
+            },
+            "mean_minimum_joint_distance": 1.0281993053852796,
+            "joint_coverage_distance_le_0_5": 0.15447154471544716,
+            "xuv_hit_within_10pct": 0.21138211382113822,
+            "xuv_hit_within_20pct": 0.34146341463414637,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.024390243902439025
+          },
+          "5": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 47.82605829530828,
+              "helium_mape_pct": 53.63360906779649,
+              "log_msw_mape_pct": 2.032796014740686,
+              "log_msw_mae_dex": 0.25694220399266254,
+              "linear_msw_mape_pct": 149.28775237821273
+            },
+            "mean_minimum_joint_distance": 0.9802692670845762,
+            "joint_coverage_distance_le_0_5": 0.17073170731707318,
+            "xuv_hit_within_10pct": 0.21951219512195122,
+            "xuv_hit_within_20pct": 0.36585365853658536,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.032520325203252036
+          }
+        },
+        "actual_top1_metrics": {
+          "xuv_mape_pct": 65.79645443995157,
+          "helium_mape_pct": 71.11857133920934,
+          "log_msw_mape_pct": 3.177112590941008,
+          "log_msw_mae_dex": 0.40494493523955366,
+          "linear_msw_mape_pct": 232.41128125324087
+        },
+        "mmr_selected_5": {
+          "coordinate_oracle_metrics_at_5": {
+            "xuv_mape_pct": 47.82605829530828,
+            "helium_mape_pct": 53.63360906779649,
+            "log_msw_mape_pct": 2.032796014740686,
+            "log_msw_mae_dex": 0.25694220399266254,
+            "linear_msw_mape_pct": 149.28775237821273
+          },
+          "mean_minimum_joint_distance": 0.9802692670845762,
+          "joint_coverage_distance_le_0_5": 0.17073170731707318,
+          "xuv_hit_within_10pct": 0.21951219512195122,
+          "xuv_hit_within_20pct": 0.36585365853658536,
+          "simultaneous_20pct_20pct_0_1dex": 0.032520325203252036
+        }
+      },
+      "legacy": {
+        "name": "legacy_synthetic_pair_ranker",
+        "mean_spearman_score_vs_negative_joint_distance": 0.6691056910569104,
+        "mean_spearman_score_vs_negative_xuv_ape": 0.30162601626016255,
+        "joint_argmin_candidate_rank": {
+          "mean": 1.6016260162601625,
+          "median": 1.0,
+          "mean_reciprocal_rank": 0.7621951219512196,
+          "recall_at_1": 0.5853658536585366,
+          "recall_at_3": 0.991869918699187,
+          "recall_at_5": 1.0
+        },
+        "xuv_argmin_candidate_rank": {
+          "mean": 2.2845528455284554,
+          "median": 2.0,
+          "mean_reciprocal_rank": 0.6331978319783197,
+          "recall_at_1": 0.44715447154471544,
+          "recall_at_3": 0.7804878048780488,
+          "recall_at_5": 1.0
+        },
+        "xuv_relevant_candidate_ranking": {
+          "within_10pct": {
+            "objects_with_relevant_candidate": 0.21951219512195122,
+            "mean_reciprocal_rank_first_relevant": 0.16205962059620596
+          },
+          "within_20pct": {
+            "objects_with_relevant_candidate": 0.36585365853658536,
+            "mean_reciprocal_rank_first_relevant": 0.29823848238482387
+          }
+        },
+        "ranked_coverage": {
+          "1": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 60.91973451119823,
+              "helium_mape_pct": 62.46402652288635,
+              "log_msw_mape_pct": 3.0328276146003734,
+              "log_msw_mae_dex": 0.3865640624597342,
+              "linear_msw_mape_pct": 214.47206529531306
+            },
+            "mean_minimum_joint_distance": 1.0707679878294194,
+            "joint_coverage_distance_le_0_5": 0.13821138211382114,
+            "xuv_hit_within_10pct": 0.13008130081300814,
+            "xuv_hit_within_20pct": 0.25203252032520324,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.024390243902439025
+          },
+          "3": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 49.521439729211956,
+              "helium_mape_pct": 55.18758581362586,
+              "log_msw_mape_pct": 2.1526707348674816,
+              "log_msw_mae_dex": 0.2724642819479167,
+              "linear_msw_mape_pct": 153.6885645937229
+            },
+            "mean_minimum_joint_distance": 0.9805774426130826,
+            "joint_coverage_distance_le_0_5": 0.17073170731707318,
+            "xuv_hit_within_10pct": 0.17886178861788618,
+            "xuv_hit_within_20pct": 0.3333333333333333,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.032520325203252036
+          },
+          "5": {
+            "coordinate_oracle_metrics_at_k": {
+              "xuv_mape_pct": 47.82605829530828,
+              "helium_mape_pct": 53.63360906779649,
+              "log_msw_mape_pct": 2.032796014740686,
+              "log_msw_mae_dex": 0.25694220399266254,
+              "linear_msw_mape_pct": 149.28775237821273
+            },
+            "mean_minimum_joint_distance": 0.9802692670845762,
+            "joint_coverage_distance_le_0_5": 0.17073170731707318,
+            "xuv_hit_within_10pct": 0.21951219512195122,
+            "xuv_hit_within_20pct": 0.36585365853658536,
+            "simultaneous_hit_20pct_20pct_0_1dex": 0.032520325203252036
+          }
+        },
+        "actual_top1_metrics": {
+          "xuv_mape_pct": 60.91973451119823,
+          "helium_mape_pct": 62.46402652288635,
+          "log_msw_mape_pct": 3.0328276146003734,
+          "log_msw_mae_dex": 0.3865640624597342,
+          "linear_msw_mape_pct": 214.47206529531306
+        },
+        "mmr_selected_5": {
+          "coordinate_oracle_metrics_at_5": {
+            "xuv_mape_pct": 47.82605829530828,
+            "helium_mape_pct": 53.63360906779649,
+            "log_msw_mape_pct": 2.032796014740686,
+            "log_msw_mae_dex": 0.25694220399266254,
+            "linear_msw_mape_pct": 149.28775237821273
+          },
+          "mean_minimum_joint_distance": 0.9802692670845762,
+          "joint_coverage_distance_le_0_5": 0.17073170731707318,
+          "xuv_hit_within_10pct": 0.21951219512195122,
+          "xuv_hit_within_20pct": 0.36585365853658536,
+          "simultaneous_20pct_20pct_0_1dex": 0.032520325203252036
+        }
+      }
+    }
+  }
+}
