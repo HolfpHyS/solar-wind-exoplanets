@@ -1,0 +1,162 @@
+{
+  "source_status": "OOF ranker development pilot; primary metrics remove every historical-dev row in a duplicate group crossing train/dev; this is still not an untouched final test",
+  "source_files": [
+    {
+      "path": "/Users/aidarryazhapov/Documents/absorb/pro/run_oof_ranker_experiment.py",
+      "bytes": 58922,
+      "sha256": "ae18546245c0449be11046a5ff63ed402d7904864509d3346d2553a4f427bf72"
+    },
+    {
+      "path": "/Users/aidarryazhapov/Documents/absorb/pro/run_aux_conditioning.py",
+      "bytes": 32676,
+      "sha256": "73418b0c492b0632ec417ab76d6eb903cf1d058dc39707e7a36c4a926b6062b0"
+    },
+    {
+      "path": "/Users/aidarryazhapov/Documents/absorb/pro/planet_pseudolabels.py",
+      "bytes": 2724,
+      "sha256": "1ed0861c80d8c3ab0a8cea373b3dacd7736b34974cb771b158412b24e20f19b2"
+    },
+    {
+      "path": "/Users/aidarryazhapov/Documents/absorb/pro/aux_data/planet_params.csv",
+      "bytes": 1169,
+      "sha256": "779ccd095a3c61c0d694d798ae14aee2bf5a04e4e7efd35823ecdfca92afe936"
+    }
+  ],
+  "artifacts": [
+    {
+      "name": "config.json",
+      "bytes": 1951,
+      "sha256": "eb9ca3b89e4603ddf384599702871cb6a52f6bb606f1d8066f0c1d6a161af798"
+    },
+    {
+      "name": "dataset_manifest.csv",
+      "bytes": 116333,
+      "sha256": "feec97d1d9c4e818dcae0a6ae6eec138aa582615f5c75c05c876036aab6ccb3c"
+    },
+    {
+      "name": "dev_candidates.npz",
+      "bytes": 45934,
+      "sha256": "d10e7b9331303286fd954f5182c3470ca5ad3f94c5f3eee8f1458a438100f1be"
+    },
+    {
+      "name": "dev_ranker_scores.npz",
+      "bytes": 34702,
+      "sha256": "41a9910f370c4d379204558a5037aa6d66a5de9d2b49d20598f2832a38d43496"
+    },
+    {
+      "name": "dev_truth_for_evaluation.npz",
+      "bytes": 17990,
+      "sha256": "026e9a40d976db0c70631e2b0f5d91e7c265cc1f5c92021d3e3f079de49dfe73"
+    },
+    {
+      "name": "final_model_0.pt",
+      "bytes": 9628637,
+      "sha256": "b9e5b32db13c7fa029f938bd7e948bf1993251c9b96ebfbe61258b0f43be2403"
+    },
+    {
+      "name": "final_model_1.pt",
+      "bytes": 9628637,
+      "sha256": "b7e871d55f9f88af126fd3c59e17037a539c096a7daceebcddc9cd4bba53d020"
+    },
+    {
+      "name": "metrics.json",
+      "bytes": 61068,
+      "sha256": "c9bbf77e175369c2da87cf879a3be360cabeb6f62b17ce2663b57987bea2bcf1"
+    },
+    {
+      "name": "oof_candidates.npz",
+      "bytes": 199644,
+      "sha256": "c8036fe2f4e2c1391f31f6976cf6784e714a067dfa70f31c0e2d0299fc7d550d"
+    },
+    {
+      "name": "oof_manifest.csv",
+      "bytes": 21118,
+      "sha256": "f26c506c539daeb2b529e2d666a175729d5650ca922e6a1f507c80416a4265e8"
+    },
+    {
+      "name": "oof_ranker_cross_validation_scores.npz",
+      "bytes": 177650,
+      "sha256": "1466fc03ede6b082556b640158eb746cc5c04c5009538eaa178bafd5d3fb8df1"
+    },
+    {
+      "name": "preproc.npz",
+      "bytes": 8810,
+      "sha256": "8499cc03a4c90deb41f0d657bb691ef70d4376568c2dc1b6fcf80787ac6fc6cd"
+    },
+    {
+      "name": "ranker_combined_0.pt",
+      "bytes": 19021,
+      "sha256": "9114ce7e1f5c78232f09a894a29ee813920fff39abd25fe71c16dc9c624f4e12"
+    },
+    {
+      "name": "ranker_combined_1.pt",
+      "bytes": 19021,
+      "sha256": "6f557af98a91f867f1715e9a30e73e670ba340d9d61165243d45ba7a78abce28"
+    },
+    {
+      "name": "ranker_combined_2.pt",
+      "bytes": 19021,
+      "sha256": "ff292648303533afc7fb7f06d344b7c4bf4149e49f061c205b87e4f8c239f147"
+    },
+    {
+      "name": "ranker_combined_3.pt",
+      "bytes": 19021,
+      "sha256": "cd15eb16a714c79bc0b1c8e4344c03a483a4f71060cdef5ae2e2ea0451b8b7e6"
+    },
+    {
+      "name": "ranker_combined_4.pt",
+      "bytes": 19021,
+      "sha256": "4afeb1cf5eb6178c4c50810050a664052d675e86d66cf912303fedc01507e52f"
+    },
+    {
+      "name": "ranker_joint_0.pt",
+      "bytes": 18857,
+      "sha256": "9f6eb857dd12f6629eba873913138fb4a79166a5e613b25aaac4171cf68986fe"
+    },
+    {
+      "name": "ranker_joint_1.pt",
+      "bytes": 18857,
+      "sha256": "e876c1752e201fad33633955c24606808fb2db5ea182fcd5512fa169e9285ed5"
+    },
+    {
+      "name": "ranker_joint_2.pt",
+      "bytes": 18857,
+      "sha256": "e683fbf302d222c0a4629daa6ca58ddcc2e3b60da00137b77df8aa3e6734415b"
+    },
+    {
+      "name": "ranker_joint_3.pt",
+      "bytes": 18857,
+      "sha256": "bbbfaf6ef93f9c8235cfac51ef4c0e055b0e0d35c74d66a1bdd71ec1c3bdd0d1"
+    },
+    {
+      "name": "ranker_joint_4.pt",
+      "bytes": 18857,
+      "sha256": "d654415d2be1d2396357f6e80f955db5fa03deadaa1b350896537f1f8fe13113"
+    },
+    {
+      "name": "ranker_xuv_0.pt",
+      "bytes": 18833,
+      "sha256": "ce40dabb6a89d59552f527f6599932d3e9e6c2c39ad459b7b0de5e1e9e0fa082"
+    },
+    {
+      "name": "ranker_xuv_1.pt",
+      "bytes": 18833,
+      "sha256": "dc9d97ebce3719609a1eca9585c739991a7508f0a67b13ec03d7c9ed76362bf4"
+    },
+    {
+      "name": "ranker_xuv_2.pt",
+      "bytes": 18833,
+      "sha256": "ef0c804580085a9879c1ec0deff06cb421810a1b1d1e084d489acea97ad2314f"
+    },
+    {
+      "name": "ranker_xuv_3.pt",
+      "bytes": 18833,
+      "sha256": "f8fc2c61afeb634293a4a0bff0928c2218a78f8cb048bba5c976d963ce90c456"
+    },
+    {
+      "name": "ranker_xuv_4.pt",
+      "bytes": 18833,
+      "sha256": "0381748b64b49082878c024ba4cd1c611bd1d83fcdc8264cbcf7f8ec502b12a3"
+    }
+  ]
+}

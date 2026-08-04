@@ -1,0 +1,64 @@
+{
+  "data_dir": "/Users/aidarryazhapov/Documents/absorb/participant/new_dataset_V3",
+  "planet_params": "/Users/aidarryazhapov/Documents/absorb/pro/aux_data/planet_params.csv",
+  "output_dir": "/Users/aidarryazhapov/Documents/absorb/pro/runs/oof_ranker_pilot_v2",
+  "outer_split_seed": 42,
+  "fold_seed": 1701,
+  "folds": 5,
+  "grouping": "union of exact target tuples and exact interpolated profiles",
+  "primary_evaluation": "historical outer dev after excluding any group that intersects outer train",
+  "generator_seeds": [
+    0,
+    1
+  ],
+  "generator_epochs": 200,
+  "batch_size": 64,
+  "generator_checkpoint_selection": "fixed epochs; no OOF/dev early stopping",
+  "ranker_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "ranker_epochs": 250,
+  "ranker_batch_objects": 32,
+  "ranker_split_seed": 2718,
+  "ranker_epoch_selection": "whole OOF producer fold held out, then refit on all OOF rows",
+  "ranker_features": "profile_pca16 + candidate3 + delta_to_pool_median3 + abs_delta3 + distance_to_median1 + mean_3nn_distance1",
+  "ranker_model": "MLP 27->64->32->1, dropout=0.1",
+  "objectives": [
+    "xuv",
+    "joint",
+    "combined"
+  ],
+  "combined_objective_definition": "0.5 * scaled XUV APE + 0.5 * scaled three-coordinate joint distance; therefore XUV is intentionally weighted twice",
+  "device": "cpu",
+  "threads": 4,
+  "reuse_oof": false,
+  "reuse_final": false,
+  "argv": [
+    "pro/run_oof_ranker_experiment.py",
+    "--folds",
+    "5",
+    "--generator-seeds",
+    "0,1",
+    "--generator-epochs",
+    "200",
+    "--ranker-seeds",
+    "0,1,2,3,4",
+    "--ranker-epochs",
+    "250",
+    "--output-dir",
+    "pro/runs/oof_ranker_pilot_v2"
+  ],
+  "versions": {
+    "python": "3.12.7 | packaged by Anaconda, Inc. | (main, Oct  4 2024, 08:22:19) [Clang 14.0.6 ]",
+    "platform": "macOS-26.2-arm64-arm-64bit",
+    "numpy": "1.26.4",
+    "torch": "2.12.1",
+    "scipy": "1.13.1",
+    "sklearn": "1.5.1",
+    "pandas": "2.2.2"
+  }
+}
